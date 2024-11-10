@@ -17,6 +17,5 @@ public class Main {
         } else {
             System.out.println("Φύγε μωρή καρακαιδόνα");
         }
-
     }
 }
