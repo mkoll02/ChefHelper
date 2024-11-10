@@ -17,5 +17,6 @@ public class Main {
         } else {
             System.out.println("Φύγε μωρή καρακαιδόνα");
         }
+        System.out.println("Ήταν μία σκληρή προσπάθεια 3 όμορφων κοριτσιών που λένε την γνώμη τους!");
     }
 }
