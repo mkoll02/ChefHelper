@@ -11,7 +11,7 @@ public class Main {
         }
 
         String recipeFilePath = args[0];
-        Recipe recipe = RecipeLoader.loadRecipe(recipeFilePath);
-        recipe.display();
+        Recipe recipe = RecipeReader.loadRecipe(recipeFilePath);
+        recipe.equals();
     }
 }
