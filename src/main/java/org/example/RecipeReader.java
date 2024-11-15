@@ -22,7 +22,8 @@ public class RecipeReader {
         return recipe;
     }
 
+//suggestion idk if it works
     public static String recipeAsString(String recipeName) throws IOException {
         return new String(Files.readAllBytes(Paths.get(recipeName)));
-    }//returns recipe file as string (untested)
+    }//returns recipe file as string
 }
