@@ -15,5 +15,7 @@ public class Main {
         recipe.display();
 
 
+        Recipe recipe = RecipeReader.loadRecipe(recipeFilePath);
+        recipe.equals();
     }
 }
