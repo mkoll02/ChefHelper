@@ -46,7 +46,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.example.RecipeApp</mainClass> <!-- Αντικατάστησε το με το path της κύριας κλάσης -->
+                            <ChefHelperApp>org.example.RecipeApp</ChefHelperApp>
                         </manifest>
                     </archive>
                 </configuration>
