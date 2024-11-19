@@ -1,19 +1,12 @@
 package org.example;
 
 import java.io.File;
-<<<<<<< HEAD
 import java.io.InputStream;
-=======
->>>>>>> 469b0a420224ec8a4542f2a256181774bf3d324b
 import java.util.Scanner;
 
 public class ChefHelperApp {
     public static void main(String[] args) {
-<<<<<<< HEAD
-        String filename = "ChefHelper/src/main/resources";
-=======
-
->>>>>>> 469b0a420224ec8a4542f2a256181774bf3d324b
+         String filename = "ChefHelper/src/main/resources";
         // Ελέγχουμε αν δόθηκε αρχείο ως όρισμα
         if (args.length != 1) {
             System.out.println("Χρήση: java -jar recipes.jar <filename.cook>");
