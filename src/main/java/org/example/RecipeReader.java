@@ -2,19 +2,18 @@ package org.example;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class RecipeReader {
-    public static Recipe loadRecipe(String filePath) {
+    public static Recipe loadRecipe(String filePath) throws IOException {
         Recipe recipe = new Recipe();
-        // Ανάγνωση και ανάλυση του αρχείου
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Ανάλυση της κάθε γραμμής για υλικά, σκεύη και χρόνο
-                // Προσθήκη στο αντικείμενο recipe
+                // Επεξεργασία κάθε γραμμής του αρχείου
+                System.out.println("Διαβάστηκε: " + line);
+                // Προσθήκη στοιχείων στη συνταγή (π.χ. υλικά, οδηγίες)
             }
-        } catch (IOException e) {
-            System.out.println("Σφάλμα κατά τη φόρτωση της συνταγής: " + e.getMessage());
         }
         return recipe;
     }
