@@ -7,17 +7,13 @@ import java.util.Scanner;
 public class ChefHelperApp {
     public static void main(String[] args) {
 
-         String filename = "ChefHelper/src/main/resources";
-
-        String fileName = "ChefHelper/src/main/resources";
-
+        String fileName = "ChefHelper/src/main/resources/pancakes.cook";
 
         // Ελέγχουμε αν δόθηκε αρχείο ως όρισμα
         if (args.length != 1) {
             System.out.println("Χρήση: java -jar recipes.jar <filename.cook>");
             return;
         }
-
 
         try {
             // Χρησιμοποιούμε τον ClassLoader για να βρούμε το αρχείο μέσα στο JAR
