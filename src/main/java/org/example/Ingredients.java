@@ -1,11 +1,6 @@
 package org.example;
 
-public class Ingredients implements ToPrint{
+public class Ingredients {
 
 
-    @Override
-    public String[] searchStuff() {
-
-        return new String[0];
-    }
 }
