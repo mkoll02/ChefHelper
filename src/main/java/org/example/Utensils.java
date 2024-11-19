@@ -1,9 +1,6 @@
 package org.example;
 
-public class Utensils implements ToPrint {
-    @Override
-    public String[] searchStuff() {
+public class Utensils {
 
-        return new String[0];
-    }
+    
 }
