@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 public class ChefHelperApp {
     public static void main(String[] args) {
-<<<<<<< HEAD
-         String filename = "ChefHelper/src/main/resources";
-=======
-        String filename = "ChefHelper/src/main/resources";
 
->>>>>>> b7d26416b12bd0ee3f2be4098f42595aeb2ca2e8
+         String filename = "ChefHelper/src/main/resources";
+
+        String fileName = "ChefHelper/src/main/resources";
+
+
         // Ελέγχουμε αν δόθηκε αρχείο ως όρισμα
         if (args.length != 1) {
             System.out.println("Χρήση: java -jar recipes.jar <filename.cook>");
