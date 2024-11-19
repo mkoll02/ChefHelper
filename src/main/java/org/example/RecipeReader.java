@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.io.IOException;
+import java.nio.file.*;
+
 public class RecipeReader {
     public static Recipe loadRecipe(String filePath) throws IOException {
         Recipe recipe = new Recipe();
@@ -17,4 +20,9 @@ public class RecipeReader {
         }
         return recipe;
     }
+
+//suggestion idk if it works
+    public static String recipeAsString(String recipeName) throws IOException {
+        return new String(Files.readAllBytes(Paths.get(recipeName)));
+    }//returns recipe file as string
 }
