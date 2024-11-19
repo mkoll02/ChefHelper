@@ -1,4 +1,4 @@
 package org.example;
 
-public class Ingredients extends Recipe{
+public class Ingredients {
 }

@@ -20,6 +20,12 @@
             <artifactId>countdown</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -46,11 +52,12 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <ChefHelperApp>org.example.RecipeApp</ChefHelperApp>
+                            <mainClass>org.example.ChefHelperApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
 </project>
