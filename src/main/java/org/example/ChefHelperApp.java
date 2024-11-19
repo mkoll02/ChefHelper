@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class ChefHelperApp {
     public static void main(String[] args) {
 
-        String fileName = "ChefHelper/src/main/resources/pancakes.cook";
+        String fileName = "ChefHelper/src/main/resources/" + args[0];
 
         // Ελέγχουμε αν δόθηκε αρχείο ως όρισμα
         if (args.length != 1) {
