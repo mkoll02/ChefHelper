@@ -1,47 +1,38 @@
 package org.example;
 
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.*;
 
 public class RecipeReader {
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] words = line.split(" ");
-                for (String word : words) {
-                    if (word.startsWith("@")) {
-                        ingredients.add(word.substring(1)); // Αφαιρούμε το @
-                    } else if (word.startsWith("#")) {
-                        utensils.add(word.substring(1)); // Αφαιρούμε το #
-                    } else if (word.startsWith("{") && word.endsWith("}")) {
-                        time = word.substring(1, word.length() - 1); // Αφαιρούμε {}
-                    } else {
-                        steps.add(word); // Θεωρούμε ότι είναι βήμα
-                    }
-                }
+
+    private final String fileName;
+
+    public RecipeReader(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public String readRecipe() throws IOException {
+        // Ελέγχουμε αν το αρχείο υπάρχει εξωτερικά
+        Path externalPath = Paths.get(fileName);
+        if (Files.exists(externalPath)) {
+            return Files.readString(externalPath);
+        }
+
+        // Διαφορετικά, διαβάζουμε το αρχείο από το classpath (resources)
+        try (InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(fileName)) {
+            if (resourceStream == null) {
+                throw new IOException("Recipe file not found: " + fileName);
             }
-        } catch (IOException e) {
-            System.out.println("Σφάλμα κατά την ανάγνωση του αρχείου: " + e.getMessage());
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(resourceStream))) {
+                StringBuilder content = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    content.append(line).append(System.lineSeparator());
+                }
+                return content.toString().trim();
+            }
         }
     }
-  public static Recipe loadRecipe(String filePath) throws IOException {
-    Recipe recipe = new Recipe();
-  try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-    String line;
-  while ((line = reader.readLine()) != null) {
- //Επεξεργασία κάθε γραμμής του αρχείου
-    System.out.println("Διαβάστηκε: " + line);
- //Προσθήκη στοιχείων στη συνταγή (π.χ. υλικά, οδηγίες)
-}
-}
-return recipe;
-}
-suggestion
-  public static String recipeAsString(String recipeName) throws IOException {
-    return new String(Files.readAllBytes(Paths.get(recipeName)));
 }//returns recipe file as string
-}
+
 

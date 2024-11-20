@@ -1,42 +1,26 @@
 package org.example;
 
-import java.io.InputStream;
-import java.util.Scanner;
+import java.io.IOException;
 
 public class ChefHelperApp {
     public static void main(String[] args) {
 
         // Ελέγχουμε αν δόθηκε αρχείο ως όρισμα
         if (args.length != 1) {
-            System.out.println("Χρήση: java -jar recipes.jar <filename.cook>");
+            System.out.println("Χρήση στο terminal: java -jar recipes.jar <filename.cook>");
             return;
         }
 
         //entry point
-        String fileName =  args[0];
-        RecipeReader recipe = new RecipeReader (fileName); //constructor
-        recipe.displayRecipe(); //call method, print recipe
-
+        String fileName = args[0];
         try {
-            // Χρησιμοποιούμε τον ClassLoader για να βρούμε το αρχείο μέσα στο JAR
-            InputStream inputStream = ChefHelperApp.class.getClassLoader().getResourceAsStream(fileName);
-            if (inputStream == null) {
-                System.out.println("Το αρχείο " + fileName + " δεν βρέθηκε στο JAR.");
-                return;
-            }
-
-            // Διαβάζουμε το περιεχόμενο του αρχείου
-            try (Scanner scanner = new Scanner(inputStream)) {
-                StringBuilder content = new StringBuilder();
-                while (scanner.hasNextLine()) {
-                    content.append(scanner.nextLine()).append("\n");
-                }
-                System.out.println("Περιεχόμενο συνταγής:");
-                System.out.println(content);
-            }
-        } catch (Exception e) {
-            System.out.println("Σφάλμα κατά την επεξεργασία του αρχείου: " + e.getMessage());
+            // Δημιουργούμε το RecipeReader και διαβάζουμε τη συνταγή
+            RecipeReader reader = new RecipeReader(fileName);
+            String recipeContent = reader.readRecipe();
+            System.out.println("Recipe content:");
+            System.out.println(recipeContent);
+        } catch (IOException e) {
+            System.err.println("Error reading recipe: " + e.getMessage());
         }
     }
-
 }
