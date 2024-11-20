@@ -14,7 +14,7 @@ public class ChefHelperApp {
 
         //entry point
         String fileName =  args[0];
-        Recipe recipe = new Recipe (fileName); //constructor
+        RecipeReader recipe = new RecipeReader (fileName); //constructor
         recipe.displayRecipe(); //call method, print recipe
 
         try {
