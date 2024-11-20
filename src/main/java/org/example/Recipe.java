@@ -1,5 +1,6 @@
 package org.example;
 
+<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -41,4 +42,12 @@ public class Recipe  {
 }
 
 
+=======
+/*
+public class Recipe {
+
+
+}
+*/
+>>>>>>> c84342e80d15ab4327c749cde97088dba003812f
 
