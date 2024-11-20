@@ -36,6 +36,8 @@
     </repositories>
 
     <build>
+        <finalName>recipes</finalName> <!-- Καθορίζει το όνομα του τελικού JAR -->
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -44,11 +46,12 @@
                 </includes>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.2.0</version> <!-- Βεβαιώσου ότι είναι ενημερωμένο -->
                 <configuration>
                     <archive>
                         <manifest>
@@ -59,5 +62,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>
