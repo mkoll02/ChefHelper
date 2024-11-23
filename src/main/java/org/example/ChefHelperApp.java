@@ -12,16 +12,27 @@ public class ChefHelperApp {
             return;
         }
 
-        //entry point
+        // Λήψη του αρχείου που δόθηκε ως όρισμα
         String fileName = args[0];
         try {
-            // Δημιουργούμε το RecipeReader και διαβάζουμε τη συνταγή
+            // Δημιουργούμε το RecipeReader και διαβάζουμε το περιεχόμενο της συνταγής
             RecipeReader reader = new RecipeReader(fileName);
             String recipeContent = reader.readRecipe();
-            System.out.println("Recipe content:");
-            System.out.println(recipeContent);
+
+            // Δημιουργούμε ένα αντικείμενο Recipe και το επεξεργαζόμαστε
+            Recipe recipe = new Recipe(fileName, recipeContent);
+
+            // Εκτύπωση της συνταγής
+            System.out.println("Συνταγή: " + fileName + " ");
+            recipe.printIngredients();
+            System.out.println();
+            recipe.printUtensils();
+            System.out.println();
+            recipe.printSteps();
+            System.out.println();
+            recipe.printTotalTime();
         } catch (IOException e) {
-            System.err.println("Error reading recipe: " + e.getMessage());
+            System.err.println("Σφάλμα κατά την ανάγνωση της συνταγής: " + e.getMessage());
         }
     }
 }
