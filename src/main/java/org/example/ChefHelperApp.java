@@ -8,7 +8,7 @@ public class ChefHelperApp {
 
         // Ελέγχουμε αν δόθηκε αρχείο ως όρισμα
         if (args.length != 1) {
-            System.out.println("Καλώς ήρθατε! \nΕπιλέξτε ανάμεσα στις συνταγές: pancakes\n");
+            System.out.println("Καλώς ήρθατε! \nΕπιλέξτε ανάμεσα στις συνταγές: pancakes, omelette, porridge\n");
             System.out.println("Χρήση στο terminal: java -jar recipes.jar <filename.cook>");
             return;
         }
