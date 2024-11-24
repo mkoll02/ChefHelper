@@ -13,9 +13,14 @@ public class Recipe  {
     int totalTime = 0;
     List<String> steps = new ArrayList<> ();
 
-    public Recipe(String name, String content) {
+    public String name;
+    public String recipe;
+
+    public Recipe(String name, String recipe) {
         // Αποθήκευση του ονόματος της συνταγής
-        parseContent(content);
+        this.name = name;
+        this.recipe = recipe;
+        //parseContent(content);
     }
 
     private void parseContent(String content) {
