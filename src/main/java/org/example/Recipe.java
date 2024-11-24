@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
-
 public class Recipe  {
 
     List<String> ingredients = new ArrayList<> ();
@@ -64,7 +62,7 @@ public class Recipe  {
     public void printSteps() {
         System.out.println("Βήματα:");
         int i=0;
-        
+
         while ( i <= steps.size()) {
 
             System.out.printf("%d. %s " , i+1, Arrays.toString(steps.get(i).split("\\n")));
@@ -76,26 +74,8 @@ public class Recipe  {
         System.out.println("Συνολικός Χρόνος: " + totalTime + " minutes");
     }
 
-
-    /* public search () {}
-   // public String search () //{
-         string symbols = {"@", "#", "~"};
-         string sosvar = { "{}", "{", "{"};
-
-        do {
-            //
-            if (= symbols) {
-                while () {
-                }
-                }
-
-            }
-
-
-        } while ();
+    //method για πόσα άτομα είναι η συνταγή & λειτουργίες
+    public void numberOfPeople(int people) {
     }
 
-    //recipe print
-    public void displayRecipe() {
-    } */
 }
