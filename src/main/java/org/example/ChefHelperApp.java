@@ -32,7 +32,7 @@ public class ChefHelperApp {
             // Εκτύπωση της συνταγής
             Display[] printer = Display.printer();
             for(Display print : printer) {
-                print.display();
+                print.display(recipeContent);
             }
 
         } catch (IOException e) {
