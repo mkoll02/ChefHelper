@@ -30,14 +30,14 @@ public class ChefHelperApp {
             recipe.numberOfPeople(people);
 
             // Εκτύπωση της συνταγής
-            System.out.println("Συνταγή: " + fileName + " ");
-            recipe.printIngredients();
-            System.out.println();
-            recipe.printUtensils();
-            System.out.println();
-            recipe.printTotalTime();
-            System.out.println();
-            recipe.printSteps();
+//            System.out.println("Συνταγή: " + fileName + " ");
+//            recipe.printIngredients();
+//            System.out.println();
+//            recipe.printUtensils();
+//            System.out.println();
+//            recipe.printTotalTime();
+//            System.out.println();
+//            recipe.printSteps();
         } catch (IOException e) {
             System.err.println("Σφάλμα κατά την ανάγνωση της συνταγής: " + e.getMessage());
         }
