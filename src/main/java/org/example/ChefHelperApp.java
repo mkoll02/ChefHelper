@@ -23,11 +23,11 @@ public class ChefHelperApp {
             // Δημιουργούμε ένα αντικείμενο Recipe και το επεξεργαζόμαστε
             Recipe recipe = new Recipe(fileName, recipeContent);
 
-//            //άτομα
-//            System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;\n");
-//            Scanner scanner = new Scanner(System.in);
-//            int people = scanner.nextInt();
-//            recipe.numberOfPeople(people);
+           //άτομα
+           System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;\n");
+           Scanner scanner = new Scanner(System.in);
+           int people = scanner.nextInt();
+           recipe.numberOfPeople(people);
 
             // Εκτύπωση της συνταγής
             Display[] printer = Display.printer();
