@@ -1,10 +1,9 @@
 package org.example;
 
-public class Steps extends Display {
-
+public class Time extends Display {
     @Override
     public void display() {
+        System.out.println("Συνολική ώρα:");
         //super.display();
-        System.out.println("Βήματα:");
     }
 }
