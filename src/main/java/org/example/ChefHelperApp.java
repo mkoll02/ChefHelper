@@ -16,11 +16,11 @@ public class ChefHelperApp {
 
 
         // Αν το πρώτο όρισμα είναι "-list"
-        if ("-list".equalsIgnoreCase(args[0])) {
-            if (args.length < 2) {
-                System.err.println("Σφάλμα: Πρέπει να δώσετε τουλάχιστον ένα αρχείο συνταγής.");
-                return;
-            }
+        //if ("-list".equalsIgnoreCase(args[0])) {
+         //   if (args.length < 2) {
+              //  System.err.println("Σφάλμα: Πρέπει να δώσετε τουλάχιστον ένα αρχείο συνταγής.");
+            //    return;
+            //}
 
         // Λήψη του αρχείου που δόθηκε ως όρισμα
         String fileName = args[0];
@@ -41,7 +41,7 @@ public class ChefHelperApp {
             // Εκτύπωση της συνταγής
             Display[] printer = Display.printer();
             for(Display print : printer) {
-                print.display();
+                print.display(recipeContent);
             }
 
         } catch (IOException e) {
