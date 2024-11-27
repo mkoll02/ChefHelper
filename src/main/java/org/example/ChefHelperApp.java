@@ -11,16 +11,15 @@ public class ChefHelperApp {
             System.out.println("Καλώς ήρθατε! \nΕπιλέξτε ανάμεσα στις συνταγές: pancakes, omelette, porridge\n");
             System.out.println("Χρήση στο terminal: java -jar recipes.jar <filename.cook>");
             return;
-        } else if (args.length<1) System.out.println("Καλώς ήρθατε! \n Δυστυχώς, δεν υπάρχουν συνταγές.\n");
+        } else {
+            System.out.println("Σφάλμα\n");
         }
 
-
-        // Αν το πρώτο όρισμα είναι "-list"
-        //if ("-list".equalsIgnoreCase(args[0])) {
-         //   if (args.length < 2) {
-              //  System.err.println("Σφάλμα: Πρέπει να δώσετε τουλάχιστον ένα αρχείο συνταγής.");
-            //    return;
-            //}
+        // Αν το πρώτο όρισμα είναι -list
+        if ("-list".equalsIgnoreCase(args[0])) {
+            System.err.println("Σφάλμα: Πρέπει να δώσετε τουλάχιστον ένα αρχείο συνταγής.");
+            return;
+        }
 
         // Λήψη του αρχείου που δόθηκε ως όρισμα
         String fileName = args[0];
@@ -29,18 +28,15 @@ public class ChefHelperApp {
             RecipeReader reader = new RecipeReader(fileName);
             String recipeContent = reader.readRecipe();
 
-            // Δημιουργούμε ένα αντικείμενο Recipe και το επεξεργαζόμαστε
-            Recipe recipe = new Recipe(fileName, recipeContent);
-
-           //άτομα
-           System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;\n");
-           Scanner scanner = new Scanner(System.in);
-           int people = scanner.nextInt();
-           recipe.numberOfPeople(people);
+            //άτομα
+            System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;\n");
+            Scanner scanner = new Scanner(System.in);
+            int people = scanner.nextInt();
+            //recipe.numberOfPeople(people);
 
             // Εκτύπωση της συνταγής
             Display[] printer = Display.printer();
-            for(Display print : printer) {
+            for (Display print : printer) {
                 print.display(recipeContent);
             }
 
