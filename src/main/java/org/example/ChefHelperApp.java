@@ -11,7 +11,16 @@ public class ChefHelperApp {
             System.out.println("Καλώς ήρθατε! \nΕπιλέξτε ανάμεσα στις συνταγές: pancakes, omelette, porridge\n");
             System.out.println("Χρήση στο terminal: java -jar recipes.jar <filename.cook>");
             return;
+        } else if (args.length<1) System.out.println("Καλώς ήρθατε! \n Δυστυχώς, δεν υπάρχουν συνταγές.\n");
         }
+
+
+        // Αν το πρώτο όρισμα είναι "-list"
+        if ("-list".equalsIgnoreCase(args[0])) {
+            if (args.length < 2) {
+                System.err.println("Σφάλμα: Πρέπει να δώσετε τουλάχιστον ένα αρχείο συνταγής.");
+                return;
+            }
 
         // Λήψη του αρχείου που δόθηκε ως όρισμα
         String fileName = args[0];
