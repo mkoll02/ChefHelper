@@ -34,6 +34,14 @@ public class RecipeProcessor {
 //
 //        return Collections.min(l);
 //    }
+    
+public int closest(String toCheck, String s1, String s2, String s3) {
+    List<Integer> l = new ArrayList<>();
+    l.add(toCheck.indexOf(s1));
+    l.add(toCheck.indexOf(s2));
+    l.add(toCheck.indexOf(s3));
+    return Collections.min(l); //returns the closest symbol or -1 if there's nothing
+}
 
     public List<String> isolateString(String recipe, List<Integer> indexes, String s1, String s2) {
         List<String> u = new ArrayList<>();
