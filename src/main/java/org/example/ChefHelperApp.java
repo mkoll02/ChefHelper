@@ -35,6 +35,7 @@ public class ChefHelperApp {
             //recipe.numberOfPeople(people);
 
             // Εκτύπωση της συνταγής
+            System.out.println("fileName.cook\n");
             Display[] printer = Display.printer();
             for (Display print : printer) {
                 print.display(recipeContent);
