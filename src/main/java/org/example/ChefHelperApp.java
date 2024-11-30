@@ -1,48 +1,32 @@
 package org.example;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 public class ChefHelperApp {
     public static void main(String[] args) {
+        RecipeManager manager = new RecipeManager();
 
-        // Ελέγχουμε αν δόθηκε αρχείο ως όρισμα
-        if (args.length != 1) {
-            System.out.println("Καλώς ήρθατε! \nΕπιλέξτε ανάμεσα στις συνταγές: pancakes, omelette, porridge\n");
-            System.out.println("Χρήση στο terminal: java -jar recipes.jar <filename.cook>");
+        // Έλεγχος ορισμάτων
+        if (args.length < 1) {
+            System.out.println("Καλώς ήρθατε!\n Λειτουργίες:");
+            System.out.println("1. Για να δείτε μια συνταγή --> java -jar recipes.jar <συνταγή.cook>\n");
+            System.out.println("2. Για την λίστα αγορών σας --> java -jar recipes.jar -list <συντ1.cook> <συντ2.cook>\n");
             return;
-        } else {
-            System.out.println("Σφάλμα\n");
         }
 
-        // Αν το πρώτο όρισμα είναι -list
+        // Επεξεργασία επιλογών
         if ("-list".equalsIgnoreCase(args[0])) {
-            System.err.println("Σφάλμα: Πρέπει να δώσετε τουλάχιστον ένα αρχείο συνταγής.");
-            return;
-        }
-
-        // Λήψη του αρχείου που δόθηκε ως όρισμα
-        String fileName = args[0];
-        try {
-            // Δημιουργούμε το RecipeReader και διαβάζουμε το περιεχόμενο της συνταγής
-            RecipeReader reader = new RecipeReader(fileName);
-            String recipeContent = reader.readRecipe();
-
-            //άτομα
-            System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;\n");
-            Scanner scanner = new Scanner(System.in);
-            int people = scanner.nextInt();
-            //recipe.numberOfPeople(people);
-
-            // Εκτύπωση της συνταγής
-            System.out.println("fileName.cook\n");
-            Display[] printer = Display.printer();
-            for (Display print : printer) {
-                print.display(recipeContent);
+            if (args.length < 2) {
+                System.err.println("Σφάλμα: Πρέπει να δώσετε τουλάχιστον ένα αρχείο συνταγής.");
+                return;
             }
-
-        } catch (IOException e) {
-            System.err.println("Σφάλμα κατά την ανάγνωση της συνταγής: " + e.getMessage());
+            // Κλήση της μεθόδου για δημιουργία λίστας αγορών
+            manager.createShoppingList(java.util.Arrays.copyOfRange(args, 1, args.length));
+        } else {
+            try {
+                // Κλήση της μεθόδου για εμφάνιση μίας συνταγής
+                manager.displayRecipe(args[0]);
+            } catch (Exception e) {
+                System.err.println("Σφάλμα: " + e.getMessage());
+            }
         }
     }
 }
