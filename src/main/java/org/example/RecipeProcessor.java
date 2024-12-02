@@ -13,45 +13,49 @@ public class RecipeProcessor {
         return Pattern.compile(Pattern.quote(key)).matcher(recipe).results().map(MatchResult::start).collect(Collectors.toList());
     }
 
-    public String checkIfExists(String r, int i1, int i2) {
-        if(i2 != -1) //check that there is something close
-            r = r.substring(i1, i2);
+    public String stringIfExists(String r, int start, int end) {
+        if(end != -1) //check that there is something close
+            return r.substring(start, end); //create substring
         return r;
     }
-    public String checkIfExists(String r, int i1, int i2, int i3) {
-        if(i2 != -1) return r.substring(i1, i2);
-        return checkIfExists(r, i1, i3);
-    }
-    
-    public int closest(String toCheck, String s1, String s2, String s3) {//returns the closest symbol or -1 if there's nothing
-        int i1 = toCheck.indexOf(s1);
-        int i2 = toCheck.indexOf(s2);
-        int i3 = toCheck.indexOf(s3);
 
-        int min = Integer.MAX_VALUE;
-
-        if (i1 != -1) min = i1;
-        if (i2 != -1) min = Math.min(min, i2);
-        if (i3 != -1) min = Math.min(min, i3);
-
-        if (min == Integer.MAX_VALUE) return -1;  //if there isn't any symbol close
-
-        return min;
+    public int indexToClosest(int i1, int i2) {//returns the closest symbol index or -1 if there's nothing
+        if(i1 != -1 && (i2 == -1 || i1<i2)) return i1;
+        return i2;
     }
 
-    public List<String> isolateString(String recipe, List<Integer> indexes, String s1, String s2) {
+    public int checkCase(boolean c, int c1, int c2) {
+        if(c) return c1;
+        return c2;
+    }
+
+    public List<String> isolateString(String str, List<Integer> indexes, String s1, String s2) {
+        String r;
         List<String> u = new ArrayList<>();
-        String r = recipe;
+        int start, end, closestSymbol, finalCut, endBrace;
 
-        for(int i = 0; i < indexes.size(); i++) {
-            if(i != (indexes.size()-1 ))  //to check if it's the last
-                r = r.substring(indexes.get(i), indexes.get(i + 1));  //keep until the next to limit substring
+        for (int i = 0; i < indexes.size(); i++) {
+            r = str;
+            start = indexes.get(i);
+            end = (i < indexes.size() - 1) ? indexes.get(i + 1) : str.length();
 
-            r = checkIfExists(r, indexes.get(i), closest(r, s1, s2, ".")); //cut until the closest symbol
-            r = checkIfExists(r, indexes.get(i)+1, r.indexOf("}")+1, r.indexOf(" ")); //cut until } or space
-            u.add(r); //put to list
+            if (start >= r.length()) continue; // skip if start is out of string
+
+            end = Math.min(end, r.length()); //end to be within bounds
+            r = r.substring(start, end);
+
+            closestSymbol = indexToClosest(r.indexOf(s1), r.indexOf(s2)); //find the closest symbol index
+            r = stringIfExists(r, 0, closestSymbol); //substring if exists same string if not
+
+            endBrace = r.indexOf("}");
+            finalCut = (endBrace != -1) ? endBrace + 1 : r.indexOf(" ");
+
+            r = stringIfExists(r, 0, finalCut);
+
+            u.add(r.trim()); // add to list
         }
         return u;
     }
+
 
 }
