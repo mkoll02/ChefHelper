@@ -5,21 +5,25 @@ import java.util.List;
 
 public class Ingredients extends Display {
 
-    public List<String> prepareIngredients(String recipe) {
-        List<String> ingredients;
+    List<String> ingredients = new ArrayList<>();
+    List<String> quantity = new ArrayList<>();
+    List<String> measurement = new ArrayList<>();
+
+    public List<String> prepareInitial(String recipe) {
+        List<String> initial;
         List<Integer> i = indexes("@", recipe);
         if(i.isEmpty()) {
             System.out.println("There are no ingredients in the recipe.");
         }
         //isolateString(String recipe, List<Integer> indexes, String s1, String s2)
-        ingredients = isolateString(recipe, i, "#", "~");
-        return ingredients;
+        initial = isolateString(recipe, i, "#", "~");
+        return initial;
     }
 
     @Override
     public void display(String recipe) {
         System.out.println("Υλικά:");
-        for(String ingredient : prepareIngredients(recipe)){
+        for(String ingredient : prepareInitial(recipe)){
             System.out.println(ingredient);
         }
     }
