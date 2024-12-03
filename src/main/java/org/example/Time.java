@@ -4,12 +4,12 @@ import java.util.List;
 
 public class Time extends Display {
     @Override
-    public void display(String recipe) {
+   public void display(String recipe) {
         // Εντοπισμός δεικτών του συμβόλου '~'
 //        List<Integer> indexes = indexes("~", recipe);
 //
 //        // Εξαγωγή χρόνων
-//        List<String> times = isolateString(recipe, indexes, "{", "}");
+//      //  List<String> times = isolateString(recipe, indexes, "{", "}");
 //
 //        int totalTime = 0; // Συνολικός χρόνος
 //
@@ -23,16 +23,16 @@ public class Time extends Display {
 
         // Εμφάνιση του συνολικού χρόνου
         //System.out.println("Συνολική ώρα: " + totalTime + " λεπτά.");
-    }
+    //}
 
     // Εξάγει τον χρόνο σε λεπτά από το κείμενο (π.χ., "15%minutes").
-    private int extractTimeInMinutes(String time) {
+ //   private int extractTimeInMinutes(String time) {
         // Αφαιρούμε μονάδες όπως "%minutes" και μετατρέπουμε τον αριθμό
-        String numericPart = time.replaceAll("[^0-9]", ""); // Κρατάμε μόνο τα ψηφία
-        if (!numericPart.isEmpty()) {
-            return Integer.parseInt(numericPart);
-        }
-        return 0; // Αν δεν υπάρχει αριθμός, επιστρέφουμε 0
+       // String numericPart = time.replaceAll("[^0-9]", ""); // Κρατάμε μόνο τα ψηφία
+       // if (!numericPart.isEmpty()) {
+            //return Integer.parseInt(numericPart);
+      //  }
+        //return 0; // Αν δεν υπάρχει αριθμός, επιστρέφουμε 0
     }
 }
 
