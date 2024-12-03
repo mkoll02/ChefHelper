@@ -36,7 +36,6 @@ public class RecipeManager {
             for (String fileName : fileNames) {
                 RecipeReader reader = new RecipeReader(fileName, fileName);
                 String recipeContent = reader.readRecipe();
-
                 reader.addIngredientsToShoppingList(recipeContent, shoppingList, people);
             }
 
