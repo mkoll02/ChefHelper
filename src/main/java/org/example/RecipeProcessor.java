@@ -24,11 +24,6 @@ public class RecipeProcessor {
         return i2;
     }
 
-    public int checkCase(boolean c, int c1, int c2) {
-        if(c) return c1;
-        return c2;
-    }
-
     public List<String> isolateString(String str, List<Integer> indexes, String s1, String s2) {
         String r;
         List<String> u = new ArrayList<>();
@@ -47,10 +42,8 @@ public class RecipeProcessor {
             closestSymbol = indexToClosest(r.indexOf(s1), r.indexOf(s2)); //find the closest symbol index
             r = stringIfExists(r, 0, closestSymbol); //substring if exists same string if not
 
-            endBrace = r.indexOf("}");
-            finalCut = (endBrace != -1) ? endBrace + 1 : r.indexOf(" ");
-
-            r = stringIfExists(r, 0, finalCut);
+            if(r.equals(stringIfExists(r, 1, r.indexOf("}")))) r = stringIfExists(r, 1, r.indexOf(" "));
+            else r = stringIfExists(r, 1, r.indexOf("}")+1);
 
             u.add(r.trim()); // add to list
         }
