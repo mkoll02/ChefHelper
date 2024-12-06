@@ -15,6 +15,19 @@ public class Ingredients extends Display {
         this.numberOfPeople = numberOfPeople;
     }
 
+    @Override
+    public void display(String recipe) {
+        System.out.println("Υλικά:");
+        printIngredients(recipe);
+
+    }
+
+    public void printIngredients(String recipe) {
+        for(String ingredient : prepareInitial(recipe)){
+            System.out.println(ingredient);
+        }
+    }
+
     public List<String> prepareInitial(String recipe) {
         List<String> initial;
         List<Integer> i = indexes("@", recipe);
@@ -26,13 +39,7 @@ public class Ingredients extends Display {
         return initial;
     }
 
-    @Override
-    public void display(String recipe) {
-        System.out.println("Υλικά:");
-        for(String ingredient : prepareInitial(recipe)){
-            System.out.println(ingredient);
-        }
-    }
+
 
 
 }
