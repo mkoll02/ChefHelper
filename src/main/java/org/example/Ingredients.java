@@ -6,7 +6,7 @@ import java.util.List;
 public class Ingredients extends Display {
 
     List<String> ingredients = new ArrayList<>();
-    List<Integer> quantity = new ArrayList<>();
+    List<Float> quantity = new ArrayList<>();
     List<String> measurement = new ArrayList<>();
 
     List<Integer> numberOfPeople = new ArrayList<>();
