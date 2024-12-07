@@ -1,7 +1,6 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
@@ -27,7 +26,7 @@ public class RecipeProcessor {
     public List<String> isolateString(String str, List<Integer> indexes, String s1, String s2) {
         String r;
         List<String> u = new ArrayList<>();
-        int start, end, closestSymbol, finalCut, endBrace;
+        int start, end, closestSymbol;
 
         for (int i = 0; i < indexes.size(); i++) {
             r = str;
@@ -50,5 +49,21 @@ public class RecipeProcessor {
         return u;
     }
 
+    public String extractName(String str) {
+        if(str.isEmpty()) return " ";
+        return stringIfExists(str, 0, str.indexOf("{"));
+    }
+
+    public void insideBrackets(String str) {
+
+    }
+
+    public void extractNumberOf(String insideBrackets) {
+
+    }
+
+    public void extractMeasurement(String insideBrackets) {
+
+    }
 
 }
