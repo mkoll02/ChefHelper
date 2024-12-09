@@ -49,23 +49,4 @@ public class RecipeProcessor {
         return u;
     }
 
-    public String extractName(String str) {//string before {
-        if(str.isEmpty()) return "";
-        return stringIfExists(str, 0, str.indexOf("{"));
-    }
-
-    public String insideBrackets(String str) {
-        if(str.equals("{}")) return "";
-        return stringIfExists(str, 1, str.indexOf("}"));
-    }
-
-    public double extractNumberOf(String insideBrackets) { //the number before %
-        if(insideBrackets.isEmpty()) return 1;
-        String s = stringIfExists(insideBrackets, 0, insideBrackets.indexOf("%"));
-        return Double.parseDouble(s);
-    }
-
-    public String extractMeasurement(String insideBrackets) {//from measurement to end
-        return insideBrackets.substring(insideBrackets.indexOf("%")+1);
-    }
 }
