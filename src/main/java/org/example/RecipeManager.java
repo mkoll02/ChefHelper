@@ -27,25 +27,36 @@ public class RecipeManager {
 
     // Δημιουργία λίστας αγορών για πολλές συνταγές
     public void createShoppingList(String[] fileNames) {
-        System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;");
-        Scanner scanner = new Scanner(System.in);
-        int people = scanner.nextInt();
 
-        Map<String, Double> shoppingList = new HashMap<>();
-        try {
-            for (String fileName : fileNames) {
-                RecipeReader reader = new RecipeReader(fileName, fileName);
-                String recipeContent = reader.readRecipe();
-                reader.addIngredientsToShoppingList(recipeContent, shoppingList, people);
-            }
+        int people;
+        boolean isTrue;
+        do {
+            System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;");
+            Scanner scanner = new Scanner(System.in);
+            people = scanner.nextInt();
+            isTrue = false;
+            if (people <= 0) {
+                System.out.println("Wrong Input");
 
-            // Εκτύπωση λίστας αγορών
-            System.out.println("Λίστα Αγορών:");
-            for (Map.Entry<String, Double> entry : shoppingList.entrySet()) {
-                System.out.println("- " + entry.getValue() + " " + entry.getKey());
+            } else {
+                isTrue = true;
+                Map<String, Double> shoppingList = new HashMap<>();
+                try {
+                    for (String fileName : fileNames) {
+                        RecipeReader reader = new RecipeReader(fileName, fileName);
+                        String recipeContent = reader.readRecipe();
+                        reader.addIngredientsToShoppingList(recipeContent, shoppingList, people);
+                    }
+
+                    // Εκτύπωση λίστας αγορών
+                    System.out.println("Λίστα Αγορών:");
+                    for (Map.Entry<String, Double> entry : shoppingList.entrySet()) {
+                        System.out.println("- " + entry.getValue() + " " + entry.getKey());
+                    }
+                } catch (IOException e) {
+                    System.err.println("Σφάλμα κατά την ανάγνωση συνταγής: " + e.getMessage());
+                }
             }
-        } catch (IOException e) {
-            System.err.println("Σφάλμα κατά την ανάγνωση συνταγής: " + e.getMessage());
-        }
+        }while (people <= 0);
     }
 }
