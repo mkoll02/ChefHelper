@@ -15,5 +15,5 @@ public class Utensils extends Display {
         for (String utensil : utensils) {
             System.out.println("- " + utensil.trim());
         }
-  }
+    }
 }
