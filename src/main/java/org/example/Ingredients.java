@@ -11,7 +11,7 @@ public class Ingredients extends Display {
     List<String> initial = new ArrayList<>();
     List<String> name = new ArrayList<>();
     List<String> measurement = new ArrayList<>();
-    List<Double> quantity = new ArrayList<>();;
+    List<Integer> quantity = new ArrayList<>();;
     List<Integer> occurrences = new ArrayList<>();;
 
     @Override
@@ -20,16 +20,12 @@ public class Ingredients extends Display {
         printIngredients(recipe);
     }
 
-    public void setNumberOfPeople(int numberOfPeople) {
-        this.numberOfPeople = numberOfPeople;
-    }
-
-    public void setIngredients() {//name+quantity+measurement
-        String a;
-        for(int i=0; i<initial.size(); i++) {
-            a = String.format("%,.2f %s %s", quantity.get(i), measurement.get(i), name.get(i));
-            ingredients.add(a);
-        }
+    public void toPrint(String recipe) {
+        prepareIngredients(recipe);
+        checkAndSumDuplicates();
+//        multiplyForPeople();
+//        conversions();
+        setIngredients();
     }
 
     public void printIngredients(String recipe) {
@@ -39,12 +35,12 @@ public class Ingredients extends Display {
         }
     }
 
-    public void toPrint(String recipe) {
-        prepareIngredients(recipe);
-        setIngredients();
-//        checkAndSumDuplicates();
-//        conversions();
-//        multiplyForPeople();
+    public void setIngredients() {//name+quantity+measurement
+        String a;
+        for(int i=0; i<name.size(); i++) {
+            a = String.format("%d%s %s", quantity.get(i), measurement.get(i), name.get(i));
+            ingredients.add(a);
+        }
     }
 
     public List<String> prepareInitial(String recipe) { //initial string
@@ -64,34 +60,73 @@ public class Ingredients extends Display {
         }
     }
 
-    public void checkAndSumDuplicates() {}
+    public void checkAndSumDuplicates() {
+        List<String> tempName = new ArrayList<>();
+        List<String> tempMeasurement = new ArrayList<>();
+        List<Integer> tempQuantity = new ArrayList<>();
+        String n, m;
+        int q;
 
-    public void conversions() {}
+        for(int i=0; i<name.size(); i++) {
+            n = name.get(i);
+            m = measurement.get(i);
+            q = quantity.get(i);
+            System.out.println(i);
+            int index = tempName.indexOf(n);
+            if(!tempName.contains(n)) {//if it isn't already add it
+                tempName.add(n);
+                tempQuantity.add(q);
+                tempMeasurement.add(m);
+            }else{//if it is sum the quantity
+                if (index < tempQuantity.size()) tempQuantity.set(index, tempQuantity.get(index) + q); // sum
+            }
+        }
+        addToLists(tempName, tempMeasurement, tempQuantity);
+    }
 
-    public void multiplyForPeople() {}
+    public void addToLists(List<String> temp_name, List<String> temp_measurement, List<Integer> temp_quantity) {
+        clearLists();
+        name.addAll(temp_name);
+        quantity.addAll(temp_quantity);
+        measurement.addAll(temp_measurement);
+    }
+
+    public void clearLists() {
+        name.clear();
+        measurement.clear();
+        quantity.clear();
+    }
+
+    public void conversions() {//
+
+    }
+
+    public void multiplyForPeople() {
+        quantity.replaceAll(q -> q * numberOfPeople);
+    }
 
 
     public String extractName(String str) {//string before {
         if(str.isEmpty()) return "";
-        return stringIfExists(str, 0, str.indexOf("{"));
+        return stringIfExists(str, 0, str.indexOf("{")).trim();
     }
 
     public String insideBrackets(String str) {
         int start = str.indexOf("{");
         int end = str.indexOf("}");
         if(str.equals("{}") || start == -1 || end == -1) return "";
-        return stringIfExists(str, start+1, end);
+        return stringIfExists(str, start+1, end).trim();
     }
 
-    public Double extractNumberOf(String insideBrackets) { //the number before %
-        if(insideBrackets.isEmpty()) return 1.0;
+    public int extractNumberOf(String insideBrackets) { //the number before %
+        if(insideBrackets.isEmpty()) return 1;
         String s = stringIfExists(insideBrackets, 0, insideBrackets.indexOf("%"));
-        return Double.parseDouble(s);
+        return Integer.parseInt(s);
     }
 
     public String extractMeasurement(String insideBrackets) {//from measurement to end
         if(!insideBrackets.contains("%")) return "";
-        return insideBrackets.substring(insideBrackets.indexOf("%")+1);
+        return insideBrackets.substring(insideBrackets.indexOf("%")+1).trim();
     }
 }
 
