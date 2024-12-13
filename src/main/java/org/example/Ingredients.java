@@ -71,7 +71,6 @@ public class Ingredients extends Display {
             n = name.get(i);
             m = measurement.get(i);
             q = quantity.get(i);
-            System.out.println(i);
             int index = tempName.indexOf(n);
             if(!tempName.contains(n)) {//if it isn't already add it
                 tempName.add(n);
