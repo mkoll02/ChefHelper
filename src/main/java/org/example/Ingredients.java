@@ -16,20 +16,25 @@ public class Ingredients extends Display {
 
     @Override
     public void display(String recipe) {
-        System.out.println("Υλικά:");
-        printIngredients(recipe);
+        setInitial(prepareInitial(recipe));
+        displayIngredients("Υλικά:");
     }
 
-    public void toPrint(String recipe) {
-        prepareIngredients(recipe);
+    public void toPrint() {
         checkAndSumDuplicates();
 //        multiplyForPeople();
 //        conversions();
         setIngredients();
     }
 
-    public void printIngredients(String recipe) {
-        toPrint(recipe);
+    public void displayIngredients(String whatItPrints) {
+        System.out.println(whatItPrints);
+        prepareIngredients();
+        printIngredients();
+    }
+
+    public void printIngredients() {
+        toPrint();
         for(String ingredient : ingredients){
             System.out.println(ingredient);
         }
@@ -49,8 +54,12 @@ public class Ingredients extends Display {
         return isolateString(recipe, occurrences, "#", "~");
     }
 
-    public void prepareIngredients(String recipe) {
-        initial = prepareInitial(recipe);
+    public void setInitial(List<String> initial) {
+        this.initial = initial;
+    }
+
+    public void prepareIngredients() {
+        //setInitial(prepareInitial(recipe));
         String i;
         for (String s : initial) {
             name.add(extractName(s));
@@ -96,36 +105,14 @@ public class Ingredients extends Display {
         quantity.clear();
     }
 
+    public void clearLists(String s) {}
+
     public void conversions() {//
 
     }
 
     public void multiplyForPeople() {
         quantity.replaceAll(q -> q * numberOfPeople);
-    }
-
-
-    public String extractName(String str) {//string before {
-        if(str.isEmpty()) return "";
-        return stringIfExists(str, 0, str.indexOf("{")).trim();
-    }
-
-    public String insideBrackets(String str) {
-        int start = str.indexOf("{");
-        int end = str.indexOf("}");
-        if(str.equals("{}") || start == -1 || end == -1) return "";
-        return stringIfExists(str, start+1, end).trim();
-    }
-
-    public int extractNumberOf(String insideBrackets) { //the number before %
-        if(insideBrackets.isEmpty()) return 1;
-        String s = stringIfExists(insideBrackets, 0, insideBrackets.indexOf("%"));
-        return Integer.parseInt(s);
-    }
-
-    public String extractMeasurement(String insideBrackets) {//from measurement to end
-        if(!insideBrackets.contains("%")) return "";
-        return insideBrackets.substring(insideBrackets.indexOf("%")+1).trim();
     }
 }
 
