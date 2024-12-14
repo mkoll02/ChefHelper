@@ -44,7 +44,7 @@ public class Ingredients extends Display {
     public void setIngredients() {//name+quantity+measurement
         String a;
         for(int i=0; i<name.size(); i++) {
-            a = String.format("%,2f%s %s", quantity.get(i), measurement.get(i), name.get(i));
+            a = String.format("%.0f%s %s", quantity.get(i), measurement.get(i), name.get(i));
             ingredients.add(a);
         }
     }
