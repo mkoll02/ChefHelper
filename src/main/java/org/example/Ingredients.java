@@ -20,6 +20,11 @@ public class Ingredients extends Display {
         displayIngredients("Υλικά:");
     }
 
+    public void displayList(List<String> i) {//for multiple recipes
+        setInitial(i);
+        displayIngredients("Λίστα αγορών:");
+    }
+
     public void displayIngredients(String whatItPrints) {// -list of ingredients
         System.out.println(whatItPrints);
         prepareIngredients();
@@ -44,7 +49,7 @@ public class Ingredients extends Display {
     public void setIngredients() {//name+quantity+measurement
         String a;
         for(int i=0; i<name.size(); i++) {
-            a = String.format("%.0f%s %s", quantity.get(i), measurement.get(i), name.get(i));
+            a = String.format("%.0f %s %s", quantity.get(i), measurement.get(i), name.get(i));
             ingredients.add(a);
         }
     }

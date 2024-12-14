@@ -12,17 +12,6 @@ public class RecipeProcessor {
         return Pattern.compile(Pattern.quote(key)).matcher(recipe).results().map(MatchResult::start).collect(Collectors.toList());
     }
 
-    public String stringIfExists(String r, int start, int end) {
-        if(end != -1) //check that there is something close
-            return r.substring(start, end); //create substring
-        return r;
-    }
-
-    public int indexToClosest(int i1, int i2) {//returns the closest symbol index or -1 if there's nothing
-        if(i1 != -1 && (i2 == -1 || i1<i2)) return i1;
-        return i2;
-    }
-
     public List<String> isolateString(String str, List<Integer> indexes, String s1, String s2) {
         String r;
         List<String> u = new ArrayList<>();
@@ -47,6 +36,17 @@ public class RecipeProcessor {
             u.add(r.trim()); // add to list
         }
         return u;
+    }
+
+    public String stringIfExists(String r, int start, int end) {
+        if(end != -1) //check that there is something close
+            return r.substring(start, end); //create substring
+        return r;
+    }
+
+    public int indexToClosest(int i1, int i2) {//returns the closest symbol index or -1 if there's nothing
+        if(i1 != -1 && (i2 == -1 || i1<i2)) return i1;
+        return i2;
     }
 
     public String extractName(String str) {//string before {

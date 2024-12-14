@@ -1,9 +1,7 @@
 package org.example;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class RecipeManager {
 
@@ -31,16 +29,20 @@ public class RecipeManager {
         Scanner scanner = new Scanner(System.in);
         int people = scanner.nextInt();
 
+        List<String> bigInitial = new ArrayList<>();
+        Ingredients i = new Ingredients();
+
         Map<String, Double> shoppingList = new HashMap<>();
         try {
             for (String fileName : fileNames) {
                 RecipeReader reader = new RecipeReader(fileName, fileName);
                 String recipeContent = reader.readRecipe();
+                bigInitial.addAll(i.prepareInitial(recipeContent)); //add all unprocessed list of all recipes together in a list
                 reader.addIngredientsToShoppingList(recipeContent, shoppingList, people);
             }
-
             // Εκτύπωση λίστας αγορών
-            System.out.println("Λίστα Αγορών:");
+            i.displayList(bigInitial);
+            //System.out.println("Λίστα Αγορών:");
             for (Map.Entry<String, Double> entry : shoppingList.entrySet()) {
                 System.out.println("- " + entry.getValue() + " " + entry.getKey());
             }
