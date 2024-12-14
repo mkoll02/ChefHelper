@@ -9,25 +9,18 @@ public class Ingredients extends Display {
 
     //lists to process
     List<String> initial = new ArrayList<>();
+    List<Integer> occurrences = new ArrayList<>();
     List<String> name = new ArrayList<>();
     List<String> measurement = new ArrayList<>();
-    List<Integer> quantity = new ArrayList<>();;
-    List<Integer> occurrences = new ArrayList<>();;
+    List<Double> quantity = new ArrayList<>();
 
     @Override
-    public void display(String recipe) {
+    public void display(String recipe) { //for one recipe
         setInitial(prepareInitial(recipe));
         displayIngredients("Υλικά:");
     }
 
-    public void toPrint() {
-        checkAndSumDuplicates();
-        //multiplyForPeople();
-        conversions();
-        setIngredients();
-    }
-
-    public void displayIngredients(String whatItPrints) {
+    public void displayIngredients(String whatItPrints) {// -list of ingredients
         System.out.println(whatItPrints);
         prepareIngredients();
         printIngredients();
@@ -38,17 +31,25 @@ public class Ingredients extends Display {
         for(String ingredient : ingredients){
             System.out.println(ingredient);
         }
+        clearLists("all lists that process");
+    }
+
+    public void toPrint() {//call methods that process lists
+        checkAndSumDuplicates();
+        //multiplyForPeople();
+        conversions();
+        setIngredients();
     }
 
     public void setIngredients() {//name+quantity+measurement
         String a;
         for(int i=0; i<name.size(); i++) {
-            a = String.format("%d%s %s", quantity.get(i), measurement.get(i), name.get(i));
+            a = String.format("%,2f%s %s", quantity.get(i), measurement.get(i), name.get(i));
             ingredients.add(a);
         }
     }
 
-    public List<String> prepareInitial(String recipe) { //initial string
+    public List<String> prepareInitial(String recipe) { //initial unprocessed string
         occurrences = indexes("@", recipe);
         if(occurrences.isEmpty()) throw new IllegalArgumentException("Δεν υπάρχουν υλικά σε αυτή τη συνταγή.");
         return isolateString(recipe, occurrences, "#", "~");
@@ -58,7 +59,7 @@ public class Ingredients extends Display {
         this.initial = initial;
     }
 
-    public void prepareIngredients() {
+    public void prepareIngredients() {//extract what's necessary for each list
         String i;
         for (String s : initial) {
             name.add(extractName(s));
@@ -71,27 +72,29 @@ public class Ingredients extends Display {
     public void checkAndSumDuplicates() {
         List<String> tempName = new ArrayList<>();
         List<String> tempMeasurement = new ArrayList<>();
-        List<Integer> tempQuantity = new ArrayList<>();
+        List<Double> tempQuantity = new ArrayList<>();
         String n, m;
-        int q;
+        Double q;
 
         for(int i=0; i<name.size(); i++) {
+            //create temporary lists to add unique elements
             n = name.get(i);
             m = measurement.get(i);
             q = quantity.get(i);
+
             int index = tempName.indexOf(n);
-            if(!tempName.contains(n)) {//if it isn't already add it
+            if(index == -1) {//if it isn't already add it
                 tempName.add(n);
                 tempQuantity.add(q);
                 tempMeasurement.add(m);
             }else{//if it is sum the quantity
-                if (index < tempQuantity.size()) tempQuantity.set(index, tempQuantity.get(index) + q); // sum
+                if (index < tempQuantity.size()) tempQuantity.set(index, tempQuantity.get(index) + q); // sum with what's already in list
             }
         }
         addToLists(tempName, tempMeasurement, tempQuantity);
     }
 
-    public void addToLists(List<String> temp_name, List<String> temp_measurement, List<Integer> temp_quantity) {
+    public void addToLists(List<String> temp_name, List<String> temp_measurement, List<Double> temp_quantity) {
         clearLists();
         name.addAll(temp_name);
         quantity.addAll(temp_quantity);
@@ -104,9 +107,13 @@ public class Ingredients extends Display {
         quantity.clear();
     }
 
-    public void clearLists(String s) {}
+    public void clearLists(String s) {
+        clearLists();
+        occurrences.clear();
+        initial.clear();
+    }
 
-    public void conversions() {//
+    public void conversions() {//convert if necessary
         for(int i=0; i<quantity.size(); i++) {
             convertTo("ml", "liters", i);
             convertTo("gr", "kg", i);
@@ -114,7 +121,7 @@ public class Ingredients extends Display {
     }
 
     public void convertTo(String s1, String s2, int i) {
-        int k;
+        double k;
         if(quantity.get(i) >= 1000) {
             if (measurement.get(i).equals(s1)) {
                 measurement.set(i, s2);

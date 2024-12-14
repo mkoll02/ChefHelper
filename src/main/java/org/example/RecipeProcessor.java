@@ -61,10 +61,10 @@ public class RecipeProcessor {
         return stringIfExists(str, start+1, end).trim();
     }
 
-    public int extractNumberOf(String insideBrackets) { //the number before %
-        if(insideBrackets.isEmpty()) return 1;
+    public Double extractNumberOf(String insideBrackets) { //the number before %
+        if(insideBrackets.isEmpty()) return 1.0;
         String s = stringIfExists(insideBrackets, 0, insideBrackets.indexOf("%"));
-        return Integer.parseInt(s);
+        return Double.parseDouble(s);
     }
 
     public String extractMeasurement(String insideBrackets) {//from measurement to end
