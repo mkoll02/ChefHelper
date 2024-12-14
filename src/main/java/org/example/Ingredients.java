@@ -22,8 +22,8 @@ public class Ingredients extends Display {
 
     public void toPrint() {
         checkAndSumDuplicates();
-//        multiplyForPeople();
-//        conversions();
+        //multiplyForPeople();
+        conversions();
         setIngredients();
     }
 
@@ -59,7 +59,6 @@ public class Ingredients extends Display {
     }
 
     public void prepareIngredients() {
-        //setInitial(prepareInitial(recipe));
         String i;
         for (String s : initial) {
             name.add(extractName(s));
@@ -108,7 +107,21 @@ public class Ingredients extends Display {
     public void clearLists(String s) {}
 
     public void conversions() {//
+        for(int i=0; i<quantity.size(); i++) {
+            convertTo("ml", "liters", i);
+            convertTo("gr", "kg", i);
+        }
+    }
 
+    public void convertTo(String s1, String s2, int i) {
+        int k;
+        if(quantity.get(i) >= 1000) {
+            if (measurement.get(i).equals(s1)) {
+                measurement.set(i, s2);
+                k = quantity.get(i) / 1000;
+                quantity.set(i, k);
+            }
+        }
     }
 
     public void multiplyForPeople() {
