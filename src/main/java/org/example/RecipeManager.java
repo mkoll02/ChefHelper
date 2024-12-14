@@ -37,7 +37,7 @@ public class RecipeManager {
             for (String fileName : fileNames) {
                 RecipeReader reader = new RecipeReader(fileName, fileName);
                 String recipeContent = reader.readRecipe();
-                bigInitial.addAll(i.prepareInitial(recipeContent)); //add all unprocessed list of all recipes together in a list
+                bigInitial.addAll(i.prepareInitial(recipeContent)); //add all unprocessed ingredients of all recipes together in a list
                 reader.addIngredientsToShoppingList(recipeContent, shoppingList, people);
             }
             // Εκτύπωση λίστας αγορών
