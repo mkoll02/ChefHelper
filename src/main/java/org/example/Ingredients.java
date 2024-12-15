@@ -9,52 +9,62 @@ public class Ingredients extends Display {
 
     //lists to process
     List<String> initial = new ArrayList<>();
+    List<Integer> occurrences = new ArrayList<>();
     List<String> name = new ArrayList<>();
     List<String> measurement = new ArrayList<>();
-    List<Double> quantity = new ArrayList<>();;
-    List<Integer> occurrences = new ArrayList<>();;
+    List<Double> quantity = new ArrayList<>();
 
     @Override
-    public void display(String recipe) {
-        System.out.println("Υλικά:");
-        printIngredients(recipe);
+    public void display(String recipe) { //for one recipe
+        setInitial(prepareInitial(recipe));
+        displayIngredients("Υλικά:");
     }
 
-    public void setNumberOfPeople(int numberOfPeople) {
-        this.numberOfPeople = numberOfPeople;
+    public void displayList(List<String> i) {//for multiple recipes
+        setInitial(i);
+        displayIngredients("Λίστα αγορών:");
+    }
+
+    public void displayIngredients(String whatItPrints) {// -list of ingredients
+        System.out.println(whatItPrints);
+        prepareIngredients();
+        printIngredients();
+    }
+
+    public void printIngredients() {
+        toPrint();
+        for(String ingredient : ingredients){
+            System.out.println(ingredient);
+        }
+        clearLists("all lists that process");
+    }
+
+    public void toPrint() {//call methods that process lists
+        checkAndSumDuplicates();
+        //multiplyForPeople();
+        conversions();
+        setIngredients();
     }
 
     public void setIngredients() {//name+quantity+measurement
         String a;
-        for(int i=0; i<initial.size(); i++) {
-            a = String.format("%,.2f %s %s", quantity.get(i), measurement.get(i), name.get(i));
+        for(int i=0; i<name.size(); i++) {
+            a = String.format("%.0f %s %s", quantity.get(i), measurement.get(i), name.get(i));
             ingredients.add(a);
         }
     }
 
-    public void printIngredients(String recipe) {
-        toPrint(recipe);
-        for(String ingredient : ingredients){
-            System.out.println(ingredient);
-        }
-    }
-
-    public void toPrint(String recipe) {
-        prepareIngredients(recipe);
-        setIngredients();
-//        checkAndSumDuplicates();
-//        conversions();
-//        multiplyForPeople();
-    }
-
-    public List<String> prepareInitial(String recipe) { //initial string
+    public List<String> prepareInitial(String recipe) { //initial unprocessed string
         occurrences = indexes("@", recipe);
         if(occurrences.isEmpty()) throw new IllegalArgumentException("Δεν υπάρχουν υλικά σε αυτή τη συνταγή.");
         return isolateString(recipe, occurrences, "#", "~");
     }
 
-    public void prepareIngredients(String recipe) {
-        initial = prepareInitial(recipe);
+    public void setInitial(List<String> initial) {
+        this.initial = initial;
+    }
+
+    public void prepareIngredients() {//extract what's necessary for each list
         String i;
         for (String s : initial) {
             name.add(extractName(s));
@@ -64,34 +74,70 @@ public class Ingredients extends Display {
         }
     }
 
-    public void checkAndSumDuplicates() {}
+    public void checkAndSumDuplicates() {
+        List<String> tempName = new ArrayList<>();
+        List<String> tempMeasurement = new ArrayList<>();
+        List<Double> tempQuantity = new ArrayList<>();
+        String n, m;
+        Double q;
 
-    public void conversions() {}
+        for(int i=0; i<name.size(); i++) {
+            //create temporary lists to add unique elements
+            n = name.get(i);
+            m = measurement.get(i);
+            q = quantity.get(i);
 
-    public void multiplyForPeople() {}
-
-
-    public String extractName(String str) {//string before {
-        if(str.isEmpty()) return "";
-        return stringIfExists(str, 0, str.indexOf("{"));
+            int index = tempName.indexOf(n);
+            if(index == -1) {//if it isn't already add it
+                tempName.add(n);
+                tempQuantity.add(q);
+                tempMeasurement.add(m);
+            }else{//if it is sum the quantity
+                if (index < tempQuantity.size()) tempQuantity.set(index, tempQuantity.get(index) + q); // sum with what's already in list
+            }
+        }
+        addToLists(tempName, tempMeasurement, tempQuantity);
     }
 
-    public String insideBrackets(String str) {
-        int start = str.indexOf("{");
-        int end = str.indexOf("}");
-        if(str.equals("{}") || start == -1 || end == -1) return "";
-        return stringIfExists(str, start+1, end);
+    public void addToLists(List<String> temp_name, List<String> temp_measurement, List<Double> temp_quantity) {
+        clearLists();
+        name.addAll(temp_name);
+        quantity.addAll(temp_quantity);
+        measurement.addAll(temp_measurement);
     }
 
-    public Double extractNumberOf(String insideBrackets) { //the number before %
-        if(insideBrackets.isEmpty()) return 1.0;
-        String s = stringIfExists(insideBrackets, 0, insideBrackets.indexOf("%"));
-        return Double.parseDouble(s);
+    public void clearLists() {
+        name.clear();
+        measurement.clear();
+        quantity.clear();
     }
 
-    public String extractMeasurement(String insideBrackets) {//from measurement to end
-        if(!insideBrackets.contains("%")) return "";
-        return insideBrackets.substring(insideBrackets.indexOf("%")+1);
+    public void clearLists(String s) {
+        clearLists();
+        occurrences.clear();
+        initial.clear();
+    }
+
+    public void conversions() {//convert if necessary
+        for(int i=0; i<quantity.size(); i++) {
+            convertTo("ml", "liters", i);
+            convertTo("gr", "kg", i);
+        }
+    }
+
+    public void convertTo(String s1, String s2, int i) {
+        double k;
+        if(quantity.get(i) >= 1000) {
+            if (measurement.get(i).equals(s1)) {
+                measurement.set(i, s2);
+                k = quantity.get(i) / 1000;
+                quantity.set(i, k);
+            }
+        }
+    }
+
+    public void multiplyForPeople() {
+        quantity.replaceAll(q -> q * numberOfPeople);
     }
 }
 
