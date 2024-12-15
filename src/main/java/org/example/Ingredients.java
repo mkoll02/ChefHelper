@@ -41,7 +41,7 @@ public class Ingredients extends Display {
 
     public void toPrint() {//call methods that process lists
         checkAndSumDuplicates();
-        //multiplyForPeople();
+        multiplyForPeople();
         conversions();
         setIngredients();
     }
