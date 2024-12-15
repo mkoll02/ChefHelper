@@ -33,7 +33,7 @@ public class RecipeManager {
                 String recipeContent = reader.readRecipe();
 
                 // Προσθέτουμε τα μη επεξεργασμένα υλικά
-                bigInitial.addAll(i.prepareInitial(recipeContent));
+                //bigInitial.addAll(i.prepareInitial(recipeContent));
                 reader.addIngredientsToShoppingList(recipeContent, shoppingList, people);
             }
 
