@@ -64,6 +64,10 @@ public class Ingredients extends Display {
         this.initial = initial;
     }
 
+    public void setNumberOfPeople(int numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
+    }
+
     public void prepareIngredients() {//extract what's necessary for each list
         String i;
         for (String s : initial) {
