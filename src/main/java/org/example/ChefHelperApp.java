@@ -1,7 +1,5 @@
 package org.example;
 
-import java.util.Scanner;
-
 public class ChefHelperApp {
 
     public static void main(String[] args) {
@@ -9,14 +7,13 @@ public class ChefHelperApp {
 
         // Έλεγχος αν υπάρχουν ορίσματα
         if (args.length < 1) {
-            System.out.println("Καλώς ήρθατε!");
-            System.out.println("Λειτουργίες:");
-            System.out.println("1. Για να δείτε μια συνταγή --> java -jar recipes.jar <συνταγή.cook>");
-            System.out.println("2. Για λίστα αγορών --> java -jar recipes.jar -list <συντ1.cook> <συντ2.cook>");
+            System.out.println("Καλώς ήρθατε!\nΛειτουργίες:\n");
+            System.out.println("1. Για να δείτε μια συνταγή --> java -jar recipes.jar <συνταγή.cook>\n");
+            System.out.println("2. Για λίστα αγορών --> java -jar recipes.jar -list <συντ1.cook> <συντ2.cook>\n");
             return;
         }
 
-        // Επεξεργασία επιλογών
+        // Για λίστα αγορών
         if ("-list".equalsIgnoreCase(args[0])) {
             if (args.length < 2) {
                 System.err.println("Σφάλμα: Πρέπει να δώσετε τουλάχιστον ένα αρχείο συνταγής.");

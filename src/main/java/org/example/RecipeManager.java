@@ -5,15 +5,13 @@ import java.util.*;
 
 public class RecipeManager {
 
-    // Εμφάνιση μίας συνταγής
+    // Εμφάνιση συνταγής
     public void displayRecipe(String fileName) throws IOException {
         RecipeReader reader = new RecipeReader(fileName, fileName);
         String recipeContent = reader.readRecipe();
 
         // Ρωτάμε τον χρήστη για αριθμό ατόμων
-        System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;");
-        Scanner scanner = new Scanner(System.in);
-        int people = scanner.nextInt();
+        int people = getNumberOfPeople();
 
         // Εμφάνιση συνταγής
         System.out.println("==== Συνταγή: " + fileName + " ====");
@@ -23,57 +21,42 @@ public class RecipeManager {
         }
     }
 
-    // Δημιουργία λίστας αγορών για πολλές συνταγές
     public void createShoppingList(String[] fileNames) {
-
-<<<<<<< HEAD
-        int people;
-        boolean isTrue;
-        do {
-            System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;");
-            Scanner scanner = new Scanner(System.in);
-            people = scanner.nextInt();
-            isTrue = false;
-            if (people <= 0) {
-                System.out.println("Wrong Input");
-
-            } else {
-                isTrue = true;
-                Map<String, Double> shoppingList = new HashMap<>();
-                try {
-                    for (String fileName : fileNames) {
-                        RecipeReader reader = new RecipeReader(fileName, fileName);
-                        String recipeContent = reader.readRecipe();
-                        reader.addIngredientsToShoppingList(recipeContent, shoppingList, people);
-                    }
-
-                    // Εκτύπωση λίστας αγορών
-                    System.out.println("Λίστα Αγορών:");
-                    for (Map.Entry<String, Double> entry : shoppingList.entrySet()) {
-                        System.out.println("- " + entry.getValue() + " " + entry.getKey());
-                    }
-                } catch (IOException e) {
-                    System.err.println("Σφάλμα κατά την ανάγνωση συνταγής: " + e.getMessage());
-                }
-=======
-        List<String> bigInitial = new ArrayList<>();
-        Ingredients i = new Ingredients();
-
+        int people = getNumberOfPeople(); // Λήψη αριθμού ατόμων με έλεγχο
         Map<String, Double> shoppingList = new HashMap<>();
+        List<String> bigInitial = new ArrayList<>();
+
         try {
+            Ingredients i = new Ingredients();
             for (String fileName : fileNames) {
                 RecipeReader reader = new RecipeReader(fileName, fileName);
                 String recipeContent = reader.readRecipe();
-                bigInitial.addAll(i.prepareInitial(recipeContent)); //add all unprocessed ingredients of all recipes together in a list
+
+                // Προσθέτουμε τα μη επεξεργασμένα υλικά
+                bigInitial.addAll(i.prepareInitial(recipeContent));
                 reader.addIngredientsToShoppingList(recipeContent, shoppingList, people);
             }
-            // Εκτύπωση λίστας αγορών
-            i.displayList(bigInitial);
-            //System.out.println("Λίστα Αγορών:");
+
+            // Εμφάνιση της λίστας αγορών ΜΙΑ ΜΟΝΟ ΦΟΡΑ
+            System.out.println("Λίστα Αγορών:");
             for (Map.Entry<String, Double> entry : shoppingList.entrySet()) {
                 System.out.println("- " + entry.getValue() + " " + entry.getKey());
->>>>>>> d0d9f8a283b5c05bbac1f8fccb3460813bf94eab
             }
-        }while (people <= 0);
+
+        } catch (IOException e) {
+            System.err.println("Σφάλμα κατά την ανάγνωση συνταγής: " + e.getMessage());
+        }
+    }
+
+
+    // Μέθοδος για να λάβουμε τον αριθμό ατόμων με έλεγχο εγκυρότητας
+    private int getNumberOfPeople() {
+        Scanner scanner = new Scanner(System.in);
+        int people;
+        do {
+          System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;\n");
+            people = scanner.nextInt();
+        }while(people<0);
+        return people;
     }
 }
