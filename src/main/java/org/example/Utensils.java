@@ -9,11 +9,13 @@ public class Utensils extends Display {
         List<Integer> indexes = indexes("#", recipe);
 
         // Εξαγωγή εργαλείων
-        List<String> utensils = isolateString(recipe, indexes, " ", ",");
+        List<String> utensils = isolateString(recipe, indexes, "@", "~");
 
         System.out.println("Σκεύη:");
         for (String utensil : utensils) {
-            System.out.println("- " + utensil.trim());
+            // Αφαιρεί ',' και '{}'
+            String cleanedUtensil = utensil.replaceAll("[,{}]", "").trim();
+            System.out.println("- " + cleanedUtensil);
         }
     }
 }
