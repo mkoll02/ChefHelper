@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Ingredients extends Display {
     List<String> ingredients = new ArrayList<>(); //final list that's printed
-    int numberOfPeople;
+    int people;
 
     //lists to process
     List<String> initial = new ArrayList<>();
@@ -64,8 +64,8 @@ public class Ingredients extends Display {
         this.initial = initial;
     }
 
-    public void setNumberOfPeople(int numberOfPeople) {
-        this.numberOfPeople = numberOfPeople;
+    public void setNumberOfPeople(int people) {
+        this.people = people;
     }
 
     public void prepareIngredients() {//extract what's necessary for each list
@@ -141,7 +141,7 @@ public class Ingredients extends Display {
     }
 
     public void multiplyForPeople() {
-        quantity.replaceAll(q -> q * numberOfPeople);
+        quantity.replaceAll(q -> q * people);
     }
 }
 

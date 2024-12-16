@@ -28,6 +28,7 @@ public class RecipeManager {
         List<String> bigInitial = new ArrayList<>();
 
         Ingredients i = new Ingredients();
+        i.setNumberOfPeople(people); // Πέρασμα του αριθμού ατόμων
 
         try {
             for (String fileName : fileNames) {
@@ -55,7 +56,7 @@ public class RecipeManager {
         Scanner scanner = new Scanner(System.in);
         int people;
         do {
-            System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;\n");
+            System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;");
             people = scanner.nextInt();
         }while(people<0);
         return people;
