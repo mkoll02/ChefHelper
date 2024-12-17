@@ -1,6 +1,14 @@
 package org.example;
 
 public abstract class Display extends RecipeProcessor {
+
+    protected int people = 1; // Προεπιλεγμένος αριθμός ατόμων
+
+    // Μέθοδος για να ορίσουμε τον αριθμό ατόμων
+    public void setNumberOfPeople(int people) {
+        this.people = people;
+    }
+
     //override this in inheritors to print there
     public void display(String recipe) {
     }

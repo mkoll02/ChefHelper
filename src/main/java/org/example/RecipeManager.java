@@ -16,7 +16,10 @@ public class RecipeManager {
         // Εμφάνιση συνταγής
         System.out.println("==== Συνταγή: " + fileName + " ====");
         Display[] printer = Display.printer();
+
+        // Ορίζουμε τον αριθμό ατόμων σε κάθε Display αντικείμενο
         for (Display print : printer) {
+            print.setNumberOfPeople(people);
             print.display(recipeContent);
         }
     }
@@ -58,7 +61,7 @@ public class RecipeManager {
         do {
             System.out.println("Για πόσα άτομα θέλετε να μαγειρέψετε;");
             people = scanner.nextInt();
-        }while(people<0);
+        }while(people<=0);
         return people;
     }
 }
