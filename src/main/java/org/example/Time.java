@@ -41,7 +41,7 @@ public class Time extends Display {
             String unit = matcher.group(2).toLowerCase();
 
             // Μετατροπή σε λεπτά
-            if (unit.contains("hour") || unit.contains("ώρες")) {
+            if (unit.contains("hour") || unit.contains("ώρα")) {
                 return value * 60; // Μετατροπή ωρών σε λεπτά
             } else if (unit.contains("minute") || unit.contains("λεπτά")) {
                 return value; // Ήδη σε λεπτά
@@ -56,7 +56,7 @@ public class Time extends Display {
         int minutes = totalMinutes % 60;
 
         if (hours > 0) {
-            return hours + " ώρες και " + minutes + " λεπτά";
+            return hours + " ώρα και " + minutes + " λεπτά";
         } else {
             return minutes + " λεπτά";
         }
