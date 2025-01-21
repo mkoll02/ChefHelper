@@ -36,7 +36,7 @@ public class RecipeReader {
     }
 
     public void addIngredientsToShoppingList(String recipeContent, Map<String, Double> shoppingList, int people) {
-        // Ανάλυση υλικών
+        //ανάλυση υλικών
         Pattern pattern = Pattern.compile("(?m)^(\\d+(\\.\\d+)?)(\\s+)([a-zA-Z]+.*)");
         Matcher matcher = pattern.matcher(recipeContent);
 
