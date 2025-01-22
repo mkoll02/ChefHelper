@@ -18,6 +18,7 @@ public class Ingredients extends Display {
     public void display(String recipe) { //for one recipe
         setInitial(prepareInitial(recipe));
         displayIngredients("Υλικά:");
+        //returns
     }
 
     public void displayList(List<String> i) {//for multiple recipes
@@ -29,6 +30,7 @@ public class Ingredients extends Display {
         System.out.println(whatItPrints);
         prepareIngredients();
         printIngredients();
+        //returns
     }
 
     public void printIngredients() {

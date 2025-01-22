@@ -21,7 +21,5 @@ public abstract class Display extends RecipeProcessor {
         display[3] = new Steps();
         return display;
     }
-
-
 }
 
