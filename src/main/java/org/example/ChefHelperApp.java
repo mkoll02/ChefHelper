@@ -1,19 +1,9 @@
 package org.example;
 
-import swing.RecipeApp;
-
-import javax.swing.*;
-import java.util.Arrays;
-
 public class ChefHelperApp {
 
     public static void main(String[] args) {
-        
-        //swing
-        SwingUtilities.invokeLater(() -> {
-            RecipeApp gui = new RecipeApp();
-            gui.setVisible(true);
-        });
+
         RecipeManager manager = new RecipeManager();
 
         // Έλεγχος αν υπάρχουν ορίσματα
@@ -30,7 +20,7 @@ public class ChefHelperApp {
                 System.err.println("Σφάλμα: Πρέπει να δώσετε τουλάχιστον ένα αρχείο συνταγής.");
                 return;
             }
-            manager.createShoppingList(Arrays.copyOfRange(args, 1, args.length));
+            manager.createShoppingList(java.util.Arrays.copyOfRange(args, 1, args.length));
         } else {
             try {
                 manager.displayRecipe(args[0]);
