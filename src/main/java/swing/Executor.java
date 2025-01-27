@@ -50,7 +50,7 @@ public class Executor {
                     return;
                 }
 
-                // Επιβεβαίωση από τον χρήστη ότι ολοκληρώθηκε το βήμα
+                // Επιβεβαίωση ότι ολοκληρώθηκε το βήμα
                 JOptionPane.showMessageDialog(
                         parent,
                         "Ο χρόνος ολοκληρώθηκε! Πατήστε OK για να συνεχίσετε.",
@@ -70,19 +70,19 @@ public class Executor {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Ελέγχουμε αν η γραμμή είναι κενή
+                // Ελεγχος αν η γραμμή είναι κενή
                 if (line.trim().isEmpty()) {
                     continue;
                 }
 
-                // Αναζήτηση για χρονο
+                // αναζήτηση για χρονο
                 String[] parts = line.split("~\\{");
                 String description = parts[0].trim();
 
                 int timeInSeconds = 0;
                 if (parts.length > 1) {
                     String timePart = parts[1].split("}")[0];
-                    timeInSeconds = parseTime(timePart); // Μετατροπή σε δευτερόλεπτα
+                    timeInSeconds = parseTime(timePart); // αλλαγή σε δευτερόλεπτα
                 }
 
 
@@ -106,15 +106,15 @@ public class Executor {
 
         return switch (unit) {
             case "seconds", "δευτερόλεπτα" -> value;
-            case "minutes", "λεπτά" -> value * 60; // Μετατροπή σε δευτερόλεπτα
-            default -> 0; 
+            case "minutes", "λεπτά" -> value * 60; // αλλαγή σε δευτερόλεπτα
+            default -> 0;
         };
     }
 
     private boolean startCountdown(int seconds) {
         Countdown countdown = CountdownFactory.countdown(seconds);
 
-        // Δημιουργία αντίστροφης μέτρησης
+        // αντίστροφη μέτρηση
         JDialog countdownDialog = new JDialog(parent, "Αντίστροφη Μέτρηση", true);
         countdownDialog.setSize(300, 150);
         countdownDialog.setLayout(new BorderLayout());
@@ -138,7 +138,7 @@ public class Executor {
         });
 
         countdown.start();
-        countdownDialog.setVisible(true); // Αναμονή μέχρι να κλείσει το παράθυρο
+        countdownDialog.setVisible(true);
         countdown.stop();
 
         return true;
