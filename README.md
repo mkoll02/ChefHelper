@@ -22,7 +22,7 @@
 
 ### 4 Εκτέλεση
 #### - **Terminal**
-Για Προβολή Συνταγής `java -jar recipes.jar <συνταγή.cook`
+Για Προβολή Συνταγής `java -jar recipes.jar <συνταγή.cook>`
 
 Για Λίστα Αγορών `java -jar recipes.jar <συνταγή1.cook> <συνταγή2.cook>`
 
