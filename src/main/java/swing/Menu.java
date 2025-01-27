@@ -72,11 +72,13 @@ public class Menu extends JFrame {
     }
 
     private void execute() {
-
-            if (recipes.size() == 1) {
-                Common.message(this, "Εκτέλεση: " + recipes.get(0), "Εκτέλεση Συνταγής");
-            }
-
+        if (recipes.size() == 1) {
+            String recipeFileName = recipes.get(0);
+            Executor executor = new Executor(this, recipeFileName);
+            executor.execute();
+        } else {
+            JOptionPane.showMessageDialog(this, "Επιλέξτε μία συνταγή για εκτέλεση.", "Προσοχή", JOptionPane.WARNING_MESSAGE);
+        }
     }
 
 
