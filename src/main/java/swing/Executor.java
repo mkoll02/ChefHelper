@@ -70,22 +70,22 @@ public class Executor {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // Ελέγχουμε αν η γραμμή είναι κενή και την παραλείπουμε
+                // Ελέγχουμε αν η γραμμή είναι κενή
                 if (line.trim().isEmpty()) {
-                    continue; // Αν η γραμμή είναι κενή, παραλείπουμε αυτή τη γραμμή
+                    continue;
                 }
 
-                // Αναζήτηση για χρονική πληροφορία στη γραμμή
+                // Αναζήτηση για χρονο
                 String[] parts = line.split("~\\{");
                 String description = parts[0].trim();
 
-                int timeInSeconds = 0; // Προεπιλογή: Δεν υπάρχει χρόνος
+                int timeInSeconds = 0;
                 if (parts.length > 1) {
-                    String timePart = parts[1].split("}")[0]; // Πάρτε μόνο το περιεχόμενο της αγκύλης
+                    String timePart = parts[1].split("}")[0];
                     timeInSeconds = parseTime(timePart); // Μετατροπή σε δευτερόλεπτα
                 }
 
-                // Αν το βήμα έχει περιγραφή (δεν είναι κενό), το προσθέτουμε
+
                 if (!description.isEmpty()) {
                     steps.add(new Step(description, timeInSeconds));
                 }
@@ -99,22 +99,22 @@ public class Executor {
     }
 
     private int parseTime(String timePart) {
-        // Διαχωρίζουμε το αριθμητικό μέρος και τη μονάδα
+
         String[] timeComponents = timePart.split("%");
-        int value = Integer.parseInt(timeComponents[0]); // Αριθμός
-        String unit = timeComponents[1].toLowerCase(); // Μονάδα (π.χ. seconds, minutes)
+        int value = Integer.parseInt(timeComponents[0]);
+        String unit = timeComponents[1].toLowerCase();
 
         return switch (unit) {
-            case "seconds", "δευτερόλεπτα" -> value; // Ήδη σε δευτερόλεπτα
+            case "seconds", "δευτερόλεπτα" -> value;
             case "minutes", "λεπτά" -> value * 60; // Μετατροπή σε δευτερόλεπτα
-            default -> 0; // Άγνωστη μονάδα
+            default -> 0; 
         };
     }
 
     private boolean startCountdown(int seconds) {
         Countdown countdown = CountdownFactory.countdown(seconds);
 
-        // Δημιουργία γραφικής διεπαφής για την αντίστροφη μέτρηση
+        // Δημιουργία αντίστροφης μέτρησης
         JDialog countdownDialog = new JDialog(parent, "Αντίστροφη Μέτρηση", true);
         countdownDialog.setSize(300, 150);
         countdownDialog.setLayout(new BorderLayout());
