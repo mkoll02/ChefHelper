@@ -2,46 +2,56 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Ingredients extends Display {
     List<String> ingredients = new ArrayList<>(); //final list that's printed
-    int people;
+    int people = 1; //default is one
 
     //lists to process
-    List<String> initial = new ArrayList<>();
+    List<String> initial = new ArrayList<>(); //unprocessed list
     List<Integer> occurrences = new ArrayList<>();
     List<String> name = new ArrayList<>();
     List<String> measurement = new ArrayList<>();
     List<Double> quantity = new ArrayList<>();
 
+    //returns the list of ingredients as string
+    public String getListOfIngredients(String whatItPrints, String recipe) {
+        setInitial(prepareInitial(recipe));
+        processing();
+        return String.format(whatItPrints + "\n" + String.join("\n", ingredients));
+    }
+
     @Override
     public void display(String recipe) { //for one recipe
         setInitial(prepareInitial(recipe));
         displayIngredients("Υλικά:");
-        //returns
     }
 
-    public void displayList(List<String> i) {//for multiple recipes
-        setInitial(i);
+    public void displayList(List<String> initialUnprocessed) {//for multiple recipes
+        setInitial(initialUnprocessed);
         displayIngredients("Λίστα αγορών:");
     }
 
-    public void displayIngredients(String whatItPrints) {// -list of ingredients
+    public void displayIngredients(String whatItPrints) {// list of ingredients
         System.out.println(whatItPrints);
-        prepareIngredients();
+        processing();
         printIngredients();
-        //returns
+    }
+
+    public void processing() {
+        prepareIngredients();
+        processLists();
     }
 
     public void printIngredients() {
-        toPrint();
         for(String ingredient : ingredients){
             System.out.println(ingredient);
         }
         clearLists("all lists that process");
     }
 
-    public void toPrint() {//call methods that process lists
+    public void processLists() { //call methods that process lists
         checkAndSumDuplicates();
         multiplyForPeople();
         conversions();

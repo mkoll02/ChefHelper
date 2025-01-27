@@ -37,11 +37,13 @@ public class RecipeManager {
 
                 //Προσθέτουμε τα όχι επεξεργασμένα υλικά και ενημερώνουμε τη λίστα αγορών
                 bigInitial.addAll(i.prepareInitial(recipeContent));
+
                 reader.addIngredientsToShoppingList(recipeContent, shoppingList, people);
             }
 
             //Εμφάνιση της λίστας αγορών
             i.displayList(bigInitial);
+
             for (Map.Entry<String, Double> entry : shoppingList.entrySet()) {
                 System.out.println("- " + entry.getValue() + " " + entry.getKey());
             }
