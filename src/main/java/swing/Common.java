@@ -110,7 +110,4 @@ public class Common {
         JOptionPane.showMessageDialog(parent, message, title, JOptionPane.INFORMATION_MESSAGE);
 
     }
-
-
-
 }

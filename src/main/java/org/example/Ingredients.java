@@ -16,10 +16,10 @@ public class Ingredients extends Display {
     List<Double> quantity = new ArrayList<>();
 
     //returns the list of ingredients as string
-    public String getListOfIngredients(String whatItPrints, String recipe) {
-        setInitial(prepareInitial(recipe));
+    public String getListOfIngredients(List<String> initialUnprocessed) {
+        setInitial(initialUnprocessed);
         processing();
-        return String.format(whatItPrints + "\n" + String.join("\n", ingredients));
+        return String.join("\n", ingredients);
     }
 
     @Override
