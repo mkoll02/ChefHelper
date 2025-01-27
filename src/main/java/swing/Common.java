@@ -105,12 +105,12 @@ public class Common {
 
     }
 
-
-
     public static void message(Component parent, String message, String title) {
 
         JOptionPane.showMessageDialog(parent, message, title, JOptionPane.INFORMATION_MESSAGE);
 
     }
+
+
 
 }
