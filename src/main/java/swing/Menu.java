@@ -2,6 +2,7 @@ package swing;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,12 +83,33 @@ public class Menu extends JFrame {
     }
 
 
+//    private void shoppingList() {
+//
+//        if (recipes.size() > 1) {
+//            Common.message(this, "Δημιουργείται λίστα αγορών για: " + String.join(", ", recipes), "Λίστα Αγορών");
+//            ShoppingList shoppingList = new ShoppingList();
+//            shoppingList.setRecipeNames(recipes);
+//
+//        }
+//
+//    }
+
+
     private void shoppingList() {
+        try {
+            ShoppingList shoppingList = new ShoppingList();
+            shoppingList.setRecipeNames(recipes); //set recipes
 
-        if (recipes.size() > 1) {
-            Common.message(this, "Δημιουργείται λίστα αγορών για: " + String.join(", ", recipes), "Λίστα Αγορών");
+            // Call to handle the process and show the result in a new window
+            shoppingList.handleShoppingList(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null,
+                    "An error occurred while generating the shopping list.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
-
     }
+
 
 }
