@@ -96,6 +96,4 @@ public class Menu extends JFrame {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-
-
 }

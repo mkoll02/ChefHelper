@@ -12,7 +12,6 @@ import java.util.List;
 public class ShoppingList extends Common{
 
     private List<String> recipes;
-    public static final Color BACKGROUND = Color.BLACK;
 
     public List<String> getRecipeNames() {
         return recipes;
@@ -25,7 +24,7 @@ public class ShoppingList extends Common{
     public ShoppingList() {
     }
 
-    //shopping list and optionally display in a new window
+    //shopping list and display in a new window
     public void handleShoppingList(boolean showInWindow) throws IOException {
         Ingredients i = new Ingredients();
         List<String> l = new ArrayList<>();
@@ -33,14 +32,8 @@ public class ShoppingList extends Common{
             l.addAll(readRecipe(recipe));
         }
         String listOfIngredients = i.getListOfIngredients(l);
+        createIngredientWindow(listOfIngredients); // here in a new window
 
-        if (showInWindow) {
-            createIngredientWindow(listOfIngredients); // here in a new window
-        } else {
-            Common.message(null,
-                    "Λίστα Υλικών:\n" + listOfIngredients,
-                    "Λίστα Αγορών");
-        }
     }
 
     public List<String> readRecipe(String recipe) throws IOException {
@@ -65,7 +58,6 @@ public class ShoppingList extends Common{
         titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
         titleLabel.setForeground(Color.WHITE);
 
-
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(titleLabel, BorderLayout.NORTH);
         panel.setBackground(Common.BACKGROUND);
@@ -74,6 +66,7 @@ public class ShoppingList extends Common{
         textArea.setEditable(false);
         textArea.setFont(new Font("Arial", Font.PLAIN, 14));
         JScrollPane scrollPane = new JScrollPane(textArea);
+
         panel.add(scrollPane, BorderLayout.CENTER);
         textArea.setBackground(Common.BACKGROUND);
         textArea.setForeground(Color.WHITE);
@@ -81,5 +74,4 @@ public class ShoppingList extends Common{
         frame.add(panel);
         frame.setVisible(true);
     }
-
 }
