@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-//κάνει τη λίστα
 public class ShoppingList extends Common{
 
     private List<String> recipes;
