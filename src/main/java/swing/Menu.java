@@ -83,24 +83,10 @@ public class Menu extends JFrame {
     }
 
 
-//    private void shoppingList() {
-//
-//        if (recipes.size() > 1) {
-//            Common.message(this, "Δημιουργείται λίστα αγορών για: " + String.join(", ", recipes), "Λίστα Αγορών");
-//            ShoppingList shoppingList = new ShoppingList();
-//            shoppingList.setRecipeNames(recipes);
-//
-//        }
-//
-//    }
-
-
     private void shoppingList() {
         try {
             ShoppingList shoppingList = new ShoppingList();
             shoppingList.setRecipeNames(recipes); //set recipes
-
-            // Call to handle the process and show the result in a new window
             shoppingList.handleShoppingList(true);
         } catch (IOException e) {
             e.printStackTrace();

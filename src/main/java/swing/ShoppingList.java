@@ -82,6 +82,4 @@ public class ShoppingList extends Common{
         frame.setVisible(true);
     }
 
-
-
 }
